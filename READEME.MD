@@ -1,1 +1,0 @@
-Repositório para guardar os códigos feitos na materia de Algoritmos e Programação 2
