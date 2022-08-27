@@ -29,7 +29,6 @@ double calculaPorcentagem(double total, eletrodomestico e[5]){
 }
 
 double calculaConsumototal(eletrodomestico e[5], double tempo){
-    double consumoCada[5];
     double resultado = 0;
     for(int i = 0; i < 5; i++){
         resultado = resultado + e[i].potencia * e[i].tempo;
