@@ -13,15 +13,15 @@ int main(){
     char cursoBuscado[30];
     tAluno alunos[5];
     for(int i = 0; i < 5;i++){
-        gets(alunos[i].matricula);
-        gets(alunos[i].nome);
-        gets(alunos[i].curso);
+        fgets(alunos[i].matricula, 10, stdin);
+        fgets(alunos[i].nome, 30, stdin);
+        fgets(alunos[i].curso, 30, stdin);
         //não funciona pq os espaços fazem ir para a próxima variável
-        // scanf("%s", &alunos[i].matricula);
-        // scanf("%s", &alunos[i].nome);
-        // scanf("%s", &alunos[i].curso);
+        // scanf("%[^\n]s", &alunos[i].matricula);
+        // scanf("%[^\n]s", &alunos[i].nome);
+        // scanf("%[^\n]s", &alunos[i].curso);
     }
-    gets(cursoBuscado);
+    fgets(cursoBuscado, 30, stdin);
 
     buscaAlunos(alunos, cursoBuscado);
 
@@ -30,8 +30,7 @@ int main(){
 void buscaAlunos(tAluno a[5], char curso[30]){
     for(int i = 0; i < 5;i++){
         if(strcmp(curso, a[i].curso) == 0){
-            printf("%s %s", a[i].matricula, a[i].nome);
-            printf("\n");
+            printf("%s %s\n", a[i].matricula, a[i].nome);
         }
     }
 }
