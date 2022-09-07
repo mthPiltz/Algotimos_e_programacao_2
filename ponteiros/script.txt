@@ -1,0 +1,4 @@
+./programa venus
+./programa Saturno
+./programa Jupiter
+./programa Terra Sol
