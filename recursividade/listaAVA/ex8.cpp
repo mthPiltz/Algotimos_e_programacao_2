@@ -12,6 +12,10 @@ int main(){
 }
 
 int potency(int base, int exponent){
+    if (exponent == 0){
+        return 1;
+    }
+
     if(exponent > 1){
         return base * potency(base, exponent - 1);
     }

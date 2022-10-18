@@ -4,14 +4,15 @@ int conta(int lenght, int v[], int k);
 
 int main(){
     int lenght, k, result;
+
     scanf("%i", &lenght);
     int vector[lenght];
 
 
-    for(int i = 0; i <= lenght;i++){
-        scanf("%i", vector[i]);
-    printf("tetse");
+    for(int i = 0; i < lenght; i++){
+        scanf("%i", &vector[i]);
     }
+
     scanf("%i", &k);
 
     result = conta(lenght, vector, k);
@@ -20,13 +21,15 @@ int main(){
 
 
 int conta(int lenght, int v[], int k){
-    int count = 0;
-
-    if(v[count] == k){
-        count = count + conta(lenght, v, k);
-        return count;
+    if(lenght <= 0){
+        return 0;
     }
-    else if(count == lenght){
-        return count;
+
+
+    if(v[lenght - 1] == k){
+        return 1 + conta(lenght - 1, v, k);
+    }
+    else{
+        return conta(lenght - 1, v, k);
     }
 }
