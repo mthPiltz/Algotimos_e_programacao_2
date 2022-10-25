@@ -65,10 +65,10 @@ int main(){
     // fgets(quantidade_de_cursos, 4, cursos_e_pesos);
     // lerCusosPesos(cursos_e_pesos, (int)quantidade_de_cursos);
 
-    char quantidade_de_alunos[6];
-    fgets(quantidade_de_alunos, 1, acertos_file);
-    acertos acerto_alunos[13861];
-    lerAcertos(acertos_file, (int)quantidade_de_alunos);
+    
+    int quantidade_de_alunos;
+    fscanf(acertos_file, "%i", &quantidade_de_alunos);
+    lerAcertos(acertos_file, quantidade_de_alunos);
     
     fclose(dados);
     fclose(cursos_e_vagas);
@@ -77,12 +77,26 @@ int main(){
     fclose(acertos_file);
 }
 
-acertos lerAcertos(FILE* acertos_file, int quantidade_de_alunos){
-    char linhaAtual[150];
+acertos lerAcertos(FILE* dados_file, int quantidade_de_alunos){
+    acertos acertos[quantidade_de_alunos];
+    int inscricao;
+    int redacao;
+    int matematica;
+    int linguagens;
+    int humanas;
+    int natureza;
     int i = 0;
 
-    while(fgets(linhaAtual, 2, acertos_file)){
-        printf("%s", linhaAtual);          
+    while(fscanf(dados_file, "%i %i %i %i %i %i",
+    &inscricao, &redacao, &matematica, &linguagens, &humanas, &natureza)){      
+        acertos[i].inscricao_aluno = inscricao;
+        acertos[i].humanas = humanas;
+        acertos[i].linguagens = linguagens;
+        acertos[i].matematica = matematica;
+        acertos[i].redacao = redacao;
+        acertos[i].natureza = natureza;
+
+        i++;
     }    
 }
 
