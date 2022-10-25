@@ -44,13 +44,50 @@ struct altera_nota_redacao{
     int nota_alterada;
 };
 
+cursos_pesos lerCusosPesos(FILE* cursos_pesos, int quantidade_de_cursos);
+acertos lerAcertos(FILE* acertos, int quantidade_de_alunos);
 
 int main(){
-    printf("a");
-    // FILE * file = fopen("acertos copy.txt", "r");
-    FILE * file = fopen("D:/Estudo/UFMS/4°SEMESTRE/PROG2/trabalho/program/arquivos_entradas/acertos.txt", "r");
-    if(file == NULL){
-    }
+    FILE * acertos_file = fopen("acertos.txt", "r");
+    FILE * alteracaoNotaRedacao = fopen("alteracaoNotaRedacao.txt", "r");
+    FILE * cursos_e_pesos = fopen("cursos_e_pesos.txt", "r");
+    FILE * cursos_e_vagas = fopen("cursos_e_vagas.txt", "r");
+    FILE * dados = fopen("dados.txt", "r");
     
-    fclose(file);
+    //Valida se todos os arquivos foram encontrados
+    if(dados == NULL || acertos_file == NULL || cursos_e_pesos == NULL ||
+       alteracaoNotaRedacao == NULL || cursos_e_vagas  == NULL){
+       printf("Morri");
+       return 0;
+    }
+
+    char quantidade_de_cursos[3];
+    // fgets(quantidade_de_cursos, 4, cursos_e_pesos);
+    // lerCusosPesos(cursos_e_pesos, (int)quantidade_de_cursos);
+
+    char quantidade_de_alunos[6];
+    fgets(quantidade_de_alunos, 1, acertos_file);
+    acertos acerto_alunos[13861];
+    lerAcertos(acertos_file, (int)quantidade_de_alunos);
+    
+    fclose(dados);
+    fclose(cursos_e_vagas);
+    fclose(cursos_e_pesos);
+    fclose(alteracaoNotaRedacao);
+    fclose(acertos_file);
+}
+
+acertos lerAcertos(FILE* acertos_file, int quantidade_de_alunos){
+    char linhaAtual[150];
+    int i = 0;
+
+    while(fgets(linhaAtual, 2, acertos_file)){
+        printf("%s", linhaAtual);          
+    }    
+}
+
+cursos_pesos lerCusosPesos(FILE* cursos_pesos, int quantidade_de_cursos){
+    
+    
+    
 }
