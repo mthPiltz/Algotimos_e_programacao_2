@@ -45,7 +45,9 @@ struct altera_nota_redacao{
 };
 
 cursos_pesos lerCusosPesos(FILE* cursos_pesos, int quantidade_de_cursos);
-acertos lerAcertos(FILE* acertos, int quantidade_de_alunos);
+acertos lerAcertos(FILE* acertos, int quantidade_de_alunos, struct acertos[]);
+
+void calcula_media(struct lista_acertos[], int tamanho_lista, int media[]);
 
 int main(){
     FILE * acertos_file = fopen("acertos.txt", "r");
@@ -61,15 +63,17 @@ int main(){
        return 0;
     }
 
-    char quantidade_de_cursos[3];
-    // fgets(quantidade_de_cursos, 4, cursos_e_pesos);
-    // lerCusosPesos(cursos_e_pesos, (int)quantidade_de_cursos);
-
-    
     int quantidade_de_alunos;
-    fscanf(acertos_file, "%i", &quantidade_de_alunos);
-    lerAcertos(acertos_file, quantidade_de_alunos);
+    int media[5] = {0};
     
+
+    fscanf(acertos_file, "%i", &quantidade_de_alunos);
+    acertos acertos[quantidade_de_alunos];
+    lerAcertos(acertos_file, quantidade_de_alunos, acertos);
+    
+    calcula_media(acertos, 5, media);
+    printf("%i\n%i\n%i\n%i\n%i", media[0], media[1], media[2], media[3], media[4]);
+
     fclose(dados);
     fclose(cursos_e_vagas);
     fclose(cursos_e_pesos);
@@ -77,31 +81,47 @@ int main(){
     fclose(acertos_file);
 }
 
-acertos lerAcertos(FILE* dados_file, int quantidade_de_alunos){
-    acertos acertos[quantidade_de_alunos];
+acertos lerAcertos(FILE* dados_file, int quantidade_de_alunos, acertos acertos[]){
     int inscricao;
     int redacao;
     int matematica;
     int linguagens;
     int humanas;
     int natureza;
-    int i = 0;
+    
 
-    while(fscanf(dados_file, "%i %i %i %i %i %i",
-    &inscricao, &redacao, &matematica, &linguagens, &humanas, &natureza)){      
+    for(int i = 0; i < quantidade_de_alunos; i++){
+        fscanf(dados_file, "%i %i %i %i %i %i", &inscricao, &linguagens, &matematica, &natureza, &humanas, &redacao);
+      
         acertos[i].inscricao_aluno = inscricao;
-        acertos[i].humanas = humanas;
         acertos[i].linguagens = linguagens;
         acertos[i].matematica = matematica;
-        acertos[i].redacao = redacao;
         acertos[i].natureza = natureza;
-
-        i++;
+        acertos[i].humanas= humanas;
+        acertos[i].redacao = redacao;        
     }    
+        
 }
 
 cursos_pesos lerCusosPesos(FILE* cursos_pesos, int quantidade_de_cursos){
     
     
     
+}
+
+void calcula_media(struct acertos lista_acertos[], int tamanho_lista, int media[]){
+    for(int i = 0; i < tamanho_lista; i++){
+        media[0] = media[0] + lista_acertos[i].linguagens;
+        media[1] = media[1] + lista_acertos[i].matematica;
+        media[2] = media[2] + lista_acertos[i].natureza;
+        media[3] = media[3] + lista_acertos[i].humanas;
+        media[4] = media[4] + lista_acertos[i].redacao;
+    }
+
+
+    media[0] = media[0] / tamanho_lista;
+    media[1] = media[1] / tamanho_lista;
+    media[2] = media[2] / tamanho_lista;
+    media[3] = media[3] / tamanho_lista;
+    media[4] = media[4] / tamanho_lista;
 }
