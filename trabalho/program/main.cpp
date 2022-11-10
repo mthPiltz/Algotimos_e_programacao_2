@@ -29,6 +29,7 @@ struct dados{
     int inscricao_aluno;
     char nome_aluno[81];
     char data_nascimento[11];
+    char modalidade[4];
 };
 struct acertos{
     int inscricao_aluno;
@@ -46,15 +47,14 @@ struct altera_nota_redacao{
 
 cursos_pesos lerCusosPesos(FILE* cursos_pesos, int quantidade_de_cursos);
 acertos lerAcertos(FILE* acertos, int quantidade_de_alunos, struct acertos[]);
-
 void calcula_media(struct lista_acertos[], int tamanho_lista, int media[]);
 
 int main(){
     FILE * acertos_file = fopen("acertos.txt", "r");
-    FILE * alteracaoNotaRedacao = fopen("alteracaoNotaRedacao.txt", "r");
-    FILE * cursos_e_pesos = fopen("cursos_e_pesos.txt", "r");
-    FILE * cursos_e_vagas = fopen("cursos_e_vagas.txt", "r");
-    FILE * dados = fopen("dados.txt", "r");
+    FILE * alteracaoNotaRedacao_file = fopen("alteracaoNotaRedacao.txt", "r");
+    FILE * cursos_e_pesos_file = fopen("cursos_e_pesos.txt", "r");
+    FILE * cursos_e_vagas_file = fopen("cursos_e_vagas.txt", "r");
+    FILE * dados_file = fopen("dados.txt", "r");
     
     //Valida se todos os arquivos foram encontrados
     if(dados == NULL || acertos_file == NULL || cursos_e_pesos == NULL ||
@@ -67,12 +67,6 @@ int main(){
     int media[5] = {0};
     
 
-    fscanf(acertos_file, "%i", &quantidade_de_alunos);
-    acertos acertos[quantidade_de_alunos];
-    lerAcertos(acertos_file, quantidade_de_alunos, acertos);
-    
-    calcula_media(acertos, 5, media);
-    printf("%i\n%i\n%i\n%i\n%i", media[0], media[1], media[2], media[3], media[4]);
 
     fclose(dados);
     fclose(cursos_e_vagas);
@@ -81,7 +75,7 @@ int main(){
     fclose(acertos_file);
 }
 
-acertos lerAcertos(FILE* dados_file, int quantidade_de_alunos, acertos acertos[]){
+acertos lerAcertos(FILE* dados_file, int quantidade_de_alunos, acertos acert    os[]){
     int inscricao;
     int redacao;
     int matematica;
@@ -103,8 +97,12 @@ acertos lerAcertos(FILE* dados_file, int quantidade_de_alunos, acertos acertos[]
         
 }
 
-cursos_pesos lerCusosPesos(FILE* cursos_pesos, int quantidade_de_cursos){
-    
+cursos_pesos lerCusosPesos(FILE* cursos_pesos, int quantidade_de_cursos, cursos_pesos lista_cursos_pesos[]){
+    char linha[400];
+
+    for(int i = 0; i < quantidade_de_cursos; i++){
+        fgets(linha, 400, cursos_pesos);
+    }
     
     
 }
